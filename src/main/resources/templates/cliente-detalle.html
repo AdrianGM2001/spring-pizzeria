@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+    <head>
+        <meta charset="UTF-8">
+        <title>Detalle de cliente</title>
+        <style>
+            body { font-family: Arial, sans-serif; margin: 20px; }
+            h1 { color: #333; }
+            h2 { color: #333; }
+            table { margin-top: 20px; }
+            th { background-color: #ffbeb1; color: #333; font-weight: normal; padding: 10px;}
+            td { background-color: #fff; color: #333; padding: 10px;}
+        </style>
+    </head>
+    <body>
+    <h1>Detalle de cliente</h1>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>DNI</th>
+                <th>Administrador</th>
+            </tr>
+            <tr>
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.direccion}"></td>
+                <td th:text="${cliente.telefono}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td th:text="${cliente.dni}"></td>
+                <td th:text="${cliente.admin} ? 'Sí' : 'No'"></td>
+            </tr>
+        </table>
+        <h2>Pedidos del cliente</h2>
+        <table border="1" style="border-collapse: collapse; width: 100%;">
+            <tr>
+                <th>ID del Pedido</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Precio Total</th>
+                <th>Método de Pago</th>
+            </tr>
+            <tr th:each="pedido : ${cliente.pedidos}">
+                <td th:text="${pedido.id}"></td>
+                <td th:text="${pedido.fecha}"></td>
+                <td th:text="${pedido.estado}"></td>
+                <td th:text="${pedido.getPrecioTotal()}"></td>
+                <td th:text="${pedido.metodoPago} != null ? ${pedido.metodoPago} : 'PENDIENTE DE PAGO'"></td>
+            </tr>
+        </table>
+    </body>
+</html>
